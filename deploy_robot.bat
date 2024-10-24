@@ -4,14 +4,14 @@ setlocal
 
 ping -n 1 google.com > nul
 if %errorlevel% neq 0 (
-    echo Not connected to the internet, defaulting to deploying main branch.
+    echo Not connected to internet. Can't download most recent changes. Deploying local main branch.
     goto :deploy_main
 )
 
-git fetch origin
-git switch --force main
-
 :deploy_main
+
+git stash
+git checkout main
 
 call gradlew deploy
 if %errorlevel% neq 0 (
