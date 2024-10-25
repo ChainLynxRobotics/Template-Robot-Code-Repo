@@ -8,6 +8,7 @@ if %errorlevel% neq 0 (
     goto :deploy_main
 )
 
+git fetch
 :deploy_main
 
 git stash
